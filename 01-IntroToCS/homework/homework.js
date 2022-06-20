@@ -18,6 +18,7 @@ return num.toString(2);
 //                         var modulo = num % 2
 //                         num = division;
 //                         almacenador.unshift(modulo);
+//  [1,1,1] === "111"
 //                                      }
 //            return almacenador.join("");
 
