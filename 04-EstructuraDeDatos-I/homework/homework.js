@@ -15,9 +15,17 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+  if(n > 0){
+  for(let i = n - 1; i >= 0 ; i--){
+      n = n * i
+  } return n;
+  }
 }
 
-function nFibonacci(n) {
+function nFibonacci(n) { 
+  for(let i = 0; i = n; i++){
+    n = i + (i+1);
+  }return n;
 }
 
 /*
@@ -30,7 +38,22 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
+ this.value = [];
+ this.size = 0;
+}
 
+Queue.prototype.enqueue = function(value){
+  this.size++;
+return Queue.value.push(value);
+}
+
+Queue.prototype.dequeue = function(value){
+  this.size--;
+  return Queue.value.shift(value);
+}
+
+Queue.prototype.size = function(value){
+return this.size;
 }
 
 // No modifiquen nada debajo de esta linea
