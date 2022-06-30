@@ -32,31 +32,39 @@ LinkedList.prototype.add = function(value){
   } return current;
 }
 
-LinkedList.prototype.remove = function(value){
-var lastvalue = [];
+LinkedList.prototype.remove = function(){
 if(this.head === null){
-  lastvalue = null;
-}else{
+  return null;
+}
+ if(this.head.next === null){
+   var valor = this.head.value;
+   this.head = null;
+   return valor;
+}
 var current = this.head;
-if(current.next === null){
-lastvalue = current;
-this.head = null;
-}else{
-  if(current.next.next){
-    current = current.next
+while(current.next.next !== null){
+current = current.next;
+}
+var valor = current.next.value;
+current.next = null;
+return valor;
+}
+
+LinkedList.prototype.search = function(arg){
+var current = this.head;
+if(this.head === null){return null;}
+while(current){
+  if(typeof arg === "function"){
+    if(arg(current.value)){
+      return current.value;
+    }
   }
-  lastvalue = current.next
+  if(current.value === arg){
+    return current.value;
 }
-}return lastvalue
-};
-
-LinkedList.prototype.search = function(value){
-if (typeof value == Node){
-
+current = current.next;
 }
-if (typeof value == function(value){}){
-  if(LinkedList.prototype.search(value))
-}
+return null;
 };
 
 
@@ -77,7 +85,42 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+function HashTable() {
+  this.numBuckets = 35;
+  this.contenedores = [];
+}
+
+HashTable.prototype.hash = function(value){
+  var aux = 0;
+  for(var i = 0; i < value.length; i++){
+    aux = aux + value.charCodeAt(i);
+  }
+  return aux % this.numBuckets;
+}
+
+HashTable.prototype.set = function(key,value){
+  if(typeof key !== "string"){
+    throw new TypeError ("Keys must be strings")
+  }
+  var pos = this.hash(key);
+  this.contenedores[pos] = this.contenedores[pos] || [];
+  this.contenedores[pos].unshift({key:key, value:value});
+}
+
+HashTable.prototype.get = function(key){
+  var pos = this.hash(key);
+  for(var i = 0; i < this.contenedores[pos].length; i++){
+    if(this.contenedores[pos][i].key === key){
+      return this.contenedores[pos][i].value
+    }
+  } return false;
+}
+
+HashTable.prototype.hasKey = function(key){
+  var hashkey = this.get(key);
+  if(hashkey){return true}
+  else{return false}
+}
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------

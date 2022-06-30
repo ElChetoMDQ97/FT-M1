@@ -15,17 +15,17 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
-  if(n > 0){
-  for(let i = n - 1; i >= 0 ; i--){
-      n = n * i
-  } return n;
+  if(n === 0 || n === 1){return 1;}
+  if(n < 0){return "No existe factorial de un numero negativo"}
+  if(n%1 !== 0){return "Solo se pueden usar numeros enteros"}
+   return n*nFactorial(n-1);
   }
-}
+
 
 function nFibonacci(n) { 
-  for(let i = 0; i = n; i++){
-    n = i + (i+1);
-  }return n;
+ if(n === 0){return 0}
+ if(n === 1){return 1}
+ return nFibonacci(n-1)+nFibonacci(n-2);
 }
 
 /*
@@ -38,22 +38,19 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
- this.value = [];
- this.size = 0;
+ this.array = [];
 }
 
 Queue.prototype.enqueue = function(value){
-  this.size++;
-return Queue.value.push(value);
+  this.array.push(value);
 }
 
-Queue.prototype.dequeue = function(value){
-  this.size--;
-  return Queue.value.shift(value);
+Queue.prototype.dequeue = function(){
+  return this.array.shift()
 }
 
-Queue.prototype.size = function(value){
-return this.size;
+Queue.prototype.size = function(){
+  return this.array.length;
 }
 
 // No modifiquen nada debajo de esta linea
