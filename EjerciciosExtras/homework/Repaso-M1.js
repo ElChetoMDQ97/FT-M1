@@ -9,14 +9,24 @@ const {
 // número u otro array anidado de números, determinar la suma de todos los números contenidos en el array.
 // El array será recibido por parámetro.
 // Ejemplo:
-//    const array = [1, [2, [3,4]], [5,6], 7];
+//    const array = [1,  [2, [3,4]],   [5,6],       7];
 //    countArray(array); --> Debería devolver 28 (1 + 2 + 3 + 4 + 5 + 6 + 7)
 // Pista: utilizar el método Array.isArray() para determinar si algun elemento de array es un array anidado
 // [Para más información del método: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/isArray]
 
 var countArray = function(array) {
     // Tu código aca:
-    
+    var arr = [];
+   for(var i = 0; i < array.length; i++){
+    if(Array.isArray(array[i])){
+         return countArray(array[i])
+    }else{
+     arr.push(array[i])
+    }
+   }
+var posicion = 0;
+ return arr.reduce((previousValue, currentValue) => previousValue + currentValue,
+   posicion);
 }
 
 
@@ -39,7 +49,7 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
-
+    return props = Object.keys(obj).length
 }
 
 
